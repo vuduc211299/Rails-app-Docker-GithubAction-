@@ -1,0 +1,44 @@
+name: build & test
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:5.7
+        options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
+        env:
+          MYSQL_DATABASE: my_app_test
+          MYSQL_USER: user
+          MYSQL_ROOT_PASSWORD: pass
+        ports:
+          - "3306:3306"
+
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 12
+      - name: Setup Ruby 2.7.6
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.6
+          bundler-cache: true
+      - uses: actions/checkout@v4
+      - name: bundle install
+        working-directory: .
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+      - name: migration
+        working-directory: .
+        run: |
+          bundle exec rake db:drop
+          bundle exec rake db:create
+          bundle exec rake db:schema:load
+      - name: run Rspec
+        working-directory: .
+        run: |
+          bundle exec rake db:migrate
+          bundle exec rspec
