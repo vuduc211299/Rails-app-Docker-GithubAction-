@@ -7,8 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: development
-      DATABASE_HOST: db
-      DATABASE_NAME: myapp_development
+      DATABASE_HOST: 127.0.0.1
       DATABASE_USER: root
       DATABASE_PORT: 3306
     services:
