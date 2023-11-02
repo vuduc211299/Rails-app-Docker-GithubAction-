@@ -5,6 +5,10 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: development
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
     services:
       db:
         image: mysql:5.7
@@ -33,13 +37,11 @@ jobs:
       - name: run migration
         working-directory: .
         run: |
-          export RAILS_ENV=development
           bundle exec rake db:drop
           bundle exec rake db:create
           bundle exec rake db:schema:load
       - name: run Rspec
         working-directory: .
         run: |
-          export RAILS_ENV=development
           bundle exec rake db:migrate
           bundle exec rspec
