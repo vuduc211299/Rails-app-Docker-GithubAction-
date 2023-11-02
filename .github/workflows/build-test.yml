@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: development
-      DATABASE_HOST: 127.0.0.1
+      DATABASE_HOST: localhost
       DATABASE_USER: root
       DATABASE_PORT: 3306
     services:
@@ -36,11 +36,6 @@ jobs:
         run: |
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
-      - name: Debug Database Configuration
-        run: |
-          echo "Database Host: $DATABASE_HOST"
-          echo "Database Name: $DATABASE_NAME"
-          echo "Database User: $DATABASE_USER"
       - name: run migration
         working-directory: .
         run: |
