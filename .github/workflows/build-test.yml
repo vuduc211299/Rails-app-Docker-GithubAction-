@@ -8,6 +8,8 @@ jobs:
     env:
       RAILS_ENV: development
       DATABASE_HOST: localhost
+      DATABASE_NAME: myapp_development
+      DATABASE_USER: user
       DATABASE_PORT: 3306
     services:
       db:
