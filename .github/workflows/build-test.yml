@@ -5,14 +5,17 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: development
     services:
       mysql:
         image: mysql:5.7
         options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
         env:
-          MYSQL_DATABASE: my_app_test
+          MYSQL_DATABASE: myapp_development
           MYSQL_USER: user
-          MYSQL_ROOT_PASSWORD: pass
+          MYSQL_PASSWORD: pass
+          BIND-ADDRESS: 0.0.0.0
         ports:
           - "3306:3306"
 
@@ -31,7 +34,7 @@ jobs:
         run: |
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
-      - name: migration
+      - name: run migration
         working-directory: .
         run: |
           bundle exec rake db:drop
