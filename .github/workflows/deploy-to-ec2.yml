@@ -23,6 +23,8 @@ jobs:
         run: ssh-keyscan ${{ secrets.EC2_HOST }} >> /home/runner/.ssh/known_hosts
       - name: Deploy
         run: |
-          ssh -tt -i ~/.ssh/id_rsa ${{secrets.EC2_USER}}@${{secrets.EC2_HOST}} "cd my-app && git pull origin main"
+          ssh -tt -i ~/.ssh/id_rsa ${{secrets.EC2_USER}}@${{secrets.EC2_HOST}}
+          cd my-app
+          git pull origin main
       - name: Clean up
         run: rm ~/.ssh/id_rsa
