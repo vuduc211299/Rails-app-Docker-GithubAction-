@@ -22,13 +22,10 @@ jobs:
 
       - name: Set up SSH key
         run: |
-          touch ssh_key.pem
           echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ssh_key.pem && chmod 600 ssh_key.pem
 
       - name: SSH into EC2 and pull latest code
         run: |
-          ssh -i ssh_key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}
-          cd my-app
-          git pull origin main
+          ssh -i "ssh_key.pem" ${{secrets.EC2_USER}}@${{secrets.EC2_HOST}} "cd /path/to/your/app && git pull origin main"
       - name: Clean up
         run: rm ssh_key.pem
