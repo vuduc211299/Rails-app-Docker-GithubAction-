@@ -25,5 +25,3 @@ jobs:
       - name: Deploy
         run: |
           ssh -t -i ~/.ssh/id_rsa ${{secrets.EC2_USER}}@${{secrets.EC2_HOST}}
-          pwd
-          ls -la
