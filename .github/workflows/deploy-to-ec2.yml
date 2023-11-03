@@ -25,7 +25,6 @@ jobs:
       - name: Deploy
         run: |
           ssh -i ~/.ssh/id_rsa ${{secrets.EC2_USER}}@${{secrets.EC2_HOST}}
-          cd my-app
           ls -la
           git pull origin main
 
