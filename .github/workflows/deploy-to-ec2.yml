@@ -24,6 +24,8 @@ jobs:
       - name: Deploy
         run: |
           ssh -tt -i ~/.ssh/id_rsa ${{secrets.EC2_USER}}@${{secrets.EC2_HOST}}
+          pwd
+          ls -la
           cd my-app
           git pull origin main
       - name: Clean up
