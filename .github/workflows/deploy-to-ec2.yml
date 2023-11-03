@@ -19,16 +19,6 @@ jobs:
           key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
           name: id_rsa
           known_hosts: ${{ secrets.EC2_HOST }}
-
-      # - name: Set up SSH key
-      #   run: |
-      #     echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ssh_key.pem && chmod 600 ssh_key.pem
-      - name: Print known_hosts
-        run: |
-          cd ../../../.ssh
-          pwd
-          ls -la
-
       - name: Add remote host key to known hosts
         run: ssh-keyscan ${{ secrets.EC2_HOST }} >> /home/runner/.ssh/known_hosts
 
