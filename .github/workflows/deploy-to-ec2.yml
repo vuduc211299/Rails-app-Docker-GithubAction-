@@ -17,6 +17,13 @@ jobs:
       - name: Set up SSH key
         run: echo "$EC2_SSH_PRIVATE_KEY" > ssh_key.pem && chmod 600 ssh_key.pem
 
+      - name: Check variable
+        run: |
+          echo "private_key: $EC2_SSH_PRIVATE_KEY"
+          cat ssh_key.pem
+          echo "ssh_user: $EC2_USER"
+          echo "ssh_host: $EC2_HOST"
+
       - name: SSH into EC2 and pull latest code
         run: |
           ssh -i ssh_key.pem $EC2_USER@$EC2_HOST 
