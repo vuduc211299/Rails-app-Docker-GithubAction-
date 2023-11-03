@@ -25,12 +25,12 @@ jobs:
           echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ssh_key.pem && chmod 600 ssh_key.pem
       - name: Print known_hosts
         run: |
-          cd ../
+          cd ../../
           pwd
           ls -la
 
       - name: Add remote host key to known hosts
-        run: ssh-keyscan ${{ secrets.EC2_HOST }} >> /home/runner/.ssh/known_hosts
+        run: ssh-keyscan ${{ secrets.EC2_HOST }} >> /home/runner/work/.ssh/known_hosts
 
       - name: SSH into EC2 and pull latest code
         run: |
