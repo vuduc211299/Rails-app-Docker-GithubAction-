@@ -1,0 +1,26 @@
+name: Deploy
+
+concurrency: production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs: 
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: action/checkout@v4
+
+      - name: Set up SSH key
+        run: echo "$EC2_SSH_PRIVATE_KEY" > ssh_key.pem && chmod 600 ssh_key.pem
+
+      - name: SSH into EC2 and pull latest code
+        run: |
+          ssh -i ssh_key.pem $EC2_USER@$EC2_HOST 
+          cd my-app
+          git pull origin main
+      - name: Clean up
+        run: rm ssh_key.pem
