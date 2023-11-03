@@ -30,7 +30,7 @@ jobs:
           ls -la
 
       - name: Add remote host key to known hosts
-        run: ssh-keyscan ${{ secrets.EC2_HOST }} >> /home/runner/work/.ssh/known_hosts
+        run: ssh-keyscan ${{ secrets.EC2_HOST }} >> /home/runner/.ssh/known_hosts
 
       - name: Deploy
         run: |
