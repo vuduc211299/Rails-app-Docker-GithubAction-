@@ -24,9 +24,6 @@ jobs:
 
       - name: Deploy
         run: |
-          ssh -i ~/.ssh/id_rsa ${{secrets.EC2_USER}}@${{secrets.EC2_HOST}}
+          ssh -t -i ~/.ssh/id_rsa ${{secrets.EC2_USER}}@${{secrets.EC2_HOST}}
           pwd
           ls -la
-
-      - name: Clean up
-        run: rm ~/.ssh/id_rsa
