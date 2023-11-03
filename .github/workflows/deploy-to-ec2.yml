@@ -17,7 +17,6 @@ jobs:
       - name: Check variable
         run: |
           echo "private_key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}"
-          cat ssh_key.pem
           echo "ssh_user: ${{ secrets.EC2_USER }}"
           echo "ssh_host: ${{ secrets.EC2_HOST }}"
 
