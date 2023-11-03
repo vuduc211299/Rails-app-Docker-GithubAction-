@@ -13,16 +13,16 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          name: id_rsa
+          known_hosts: ${{ secrets.EC2_HOST }}
 
-      - name: Check variable
-        run: |
-          echo "private_key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}"
-          echo "ssh_user: ${{ secrets.EC2_USER }}"
-          echo "ssh_host: ${{ secrets.EC2_HOST }}"
-
-      - name: Set up SSH key
-        run: |
-          echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ssh_key.pem && chmod 600 ssh_key.pem
+      # - name: Set up SSH key
+      #   run: |
+      #     echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ssh_key.pem && chmod 600 ssh_key.pem
       - name: Print known_hosts
         run: |
           cd ../../../
@@ -32,9 +32,9 @@ jobs:
       - name: Add remote host key to known hosts
         run: ssh-keyscan ${{ secrets.EC2_HOST }} >> /home/runner/work/.ssh/known_hosts
 
-      - name: SSH into EC2 and pull latest code
+      - name: Deploy
         run: |
-          ssh -i "ssh_key.pem" ${{secrets.EC2_USER}}@${{secrets.EC2_HOST}} "cd my-app && git pull origin main"
+          ssh -i id_rsa ${{secrets.EC2_USER}}@${{secrets.EC2_HOST}} "cd my-app && git pull origin main"
 
       - name: Clean up
         run: rm ssh_key.pem
