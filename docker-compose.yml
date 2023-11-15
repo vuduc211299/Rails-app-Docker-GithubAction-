@@ -20,10 +20,12 @@ services:
       - ./.env
     volumes:
       - .:/myapp/
+      - bundle_path:/bundle
     ports:
       - 3000:3000
     depends_on:
       - db
 
 volumes:
+  bundle_path:
   mysql_data:
