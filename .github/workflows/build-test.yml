@@ -10,6 +10,7 @@ jobs:
       DATABASE_HOST: 127.0.0.1
       DATABASE_USER: root
       DATABASE_PORT: 3306
+      RAILS_MASTER_KEY: ${{secrets.RAILS_MASTER_KEY}}
     services:
       db:
         image: mysql:5.7
