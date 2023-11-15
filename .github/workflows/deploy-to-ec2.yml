@@ -22,5 +22,4 @@ jobs:
       - name: Add remote host key to known hosts
         run: ssh-keyscan ${{ secrets.EC2_HOST }} >> /home/runner/.ssh/known_hosts
       - name: Deploy
-        run: ssh -i ~/.ssh/id_rsa ${{secrets.EC2_USER}}@${{secrets.EC2_HOST}} "cd ebs-data/my-app && git pull origin main && docker-compose down && docker-compose up -d && docker-compose exec web rails db:migrate"
-
+        run: ssh -i ~/.ssh/id_rsa ${{secrets.EC2_USER}}@${{secrets.EC2_HOST}} "cd ebs-data/my-app && git pull origin main && docker-compose down && docker-compose up -d && docker-compose run web bundle exec rails db:migrate"
