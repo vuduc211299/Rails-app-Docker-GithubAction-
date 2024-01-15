@@ -26,6 +26,12 @@ services:
     depends_on:
       - db
 
+  mail_server:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
 volumes:
   bundle_path:
   mysql_data:
