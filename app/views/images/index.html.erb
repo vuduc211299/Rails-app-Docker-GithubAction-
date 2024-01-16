@@ -1,4 +1,6 @@
-<h1>Cat Cat images</h1>
+<h1>Meow images</h1>
+
+<%= link_to 'Create new image', new_image_path %>
 
 <table>
   <thead>
@@ -15,7 +17,7 @@
       <tr>
         <td><%= image.title %></td>
         <td><%= image.description %></td>
-        <td><img width='50px' hight='50px'  src="<%= ENV.fetch("AWS_IMG_SRC") %><%= image.url %>" alt="Image from S3"><td>
+        <td><img width='50px' hight='50px' src="<%= image.signed_url %>" alt="Image from S3"><td>
       </tr>
     <% end %>
   </tbody>

@@ -11,4 +11,7 @@ Rails.application.routes.draw do
     root 'images#index', as: :authenticated_root
     resources :images
   end
+
+  get '*path', to: 'application#not_found'
+
 end
