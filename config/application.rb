@@ -1,6 +1,6 @@
-require_relative "boot"
+require_relative 'boot'
 
-require "rails/all"
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -12,7 +12,7 @@ module Myapp
     config.load_defaults 7.0
 
     config.action_dispatch.default_headers = {
-      'X-Content-Type-Options' => 'nosniff',
+      'X-Content-Type-Options' => 'nosniff'
     }
 
     # Configuration for the application, engines, and railties goes here.

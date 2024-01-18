@@ -13,5 +13,4 @@ Rails.application.routes.draw do
   end
 
   get '*path', to: 'application#not_found'
-
 end
