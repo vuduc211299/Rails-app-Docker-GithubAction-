@@ -6,4 +6,6 @@ class User < ApplicationRecord
          :confirmable
 
   has_many :images
+
+  enum role: { user: 0, supervisor: 1 }
 end

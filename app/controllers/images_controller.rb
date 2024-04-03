@@ -3,6 +3,7 @@
 # The ImagesController handles the logic for managing images in the application.
 class ImagesController < ApplicationController
   before_action :authenticate_user!
+  # load_and_authorize_resource
 
   # Retrieves all images belonging to the current user and assigns them to the @images instance variable.
   def index
