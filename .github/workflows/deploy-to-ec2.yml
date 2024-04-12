@@ -33,4 +33,4 @@ jobs:
 
       - name: Execute commands on EC2
         run: |
-          aws ssm send-command --document-name "AWS-RunShellCommand" --targets i-09f8b5fd1af40cb1d --region ${{ env.AWS_REGION }} --parameters commands="pwd && ls -la"
+          aws ssm send-command --document-name "AWS-RunShellCommand" --targets "Key=instanceids,Values=i-09f8b5fd1af40cb1d" --region ${{ env.AWS_REGION }} --parameters commands="pwd && ls -la"
