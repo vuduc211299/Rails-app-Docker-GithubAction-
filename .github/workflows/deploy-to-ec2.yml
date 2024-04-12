@@ -40,5 +40,5 @@ jobs:
           echo "aws ssm send-command --document-name 'AWS-RunShellScript' --targets 'Key=instanceids,Values=i-09f8b5fd1af40cb1d' --region ${{ env.AWS_REGION }} --parameters commands='pwd && ls -la'" >> $GITHUB_OUTPUT
       - name: Get command output
         run: |
-          command_id=$(echo "${{ steps.send-command.outputs[0] }}" | jq -r '.Command.CommandId')
+          command_id=$(echo "${{ steps.send-command.outputs[1] }}" | jq -r '.Command.CommandId')
           aws ssm get-command-invocation --command-id "$command_id" --instance-id i-09f8b5fd1af40cb1d --region ${{ env.AWS_REGION }}
