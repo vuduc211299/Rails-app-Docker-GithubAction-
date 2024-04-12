@@ -3,10 +3,8 @@ name: Deploy
 concurrency: production
 
 on:
-  workflow_run:
-    workflows: ["build & test"]
-    types:
-      - completed
+  push:
+    branches: main
 
 jobs: 
   deployment:
