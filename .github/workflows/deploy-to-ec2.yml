@@ -37,7 +37,7 @@ jobs:
       - name: Execute commands on EC2
         id: send-command
         run: |
-          aws ssm send-command --document-name "AWS-RunShellScript" --targets "Key=instanceids,Values=i-09f8b5fd1af40cb1d" --region ${{ env.AWS_REGION }} --parameters commands="pwd && ls -la" --output text --query "Command.CommandId"
+          echo "aws ssm send-command --document-name 'AWS-RunShellScript' --targets 'Key=instanceids,Values=i-09f8b5fd1af40cb1d' --region ${{ env.AWS_REGION }} --parameters commands='pwd && ls -la'" >> $GITHUB_OUTPUT
       - name: Get command output
         run: |
           command_id=$(echo "${{ steps.send-command.outputs.* }}" | jq -r '.Command.CommandId')
